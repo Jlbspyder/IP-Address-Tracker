@@ -44,29 +44,6 @@ Install Node.js and npm, and get an [IPify Geolocation API key](https://geo.ipif
 - Live Site URL: [https://jlb-ip-address-tracker.netlify.app/](https://jlb-ip-address-tracker.netlify.app/)
 
 
-
-### Manual deployment
-
-Set your API key in `.env.local`, run `npm run build`, and upload the `dist` folder through [Netlify Drop](https://app.netlify.com/drop).
-
-For updates, rebuild and upload the new `dist` folder to the existing site's deploy area in Netlify.
-
-### Deployment from Git
-
-Import the repository into Netlify with these settings:
-
-- Build command: `npm run build`
-- Publish directory: `dist`
-- Build environment variable: `VITE_IPIFY_API_KEY` set to your IPify key
-
-Rebuild and redeploy after changing the key. Vite reads environment variables at build time.
-
-## API key handling
-
-The `*.local` rule in `.gitignore` excludes `.env.local` from Git. Do not commit your key.
-
-Vite includes `VITE_` variables in browser files, so the deployed key is visible to visitors. Ignoring `.env.local` prevents the source file from being committed; it does not hide the key in the deployed app. Keeping a key private requires a server-side endpoint.
-
 ## Credits
 
 - Geolocation: [IPify](https://geo.ipify.org/docs)
