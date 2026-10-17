@@ -39,11 +39,13 @@ Install Node.js and npm, and get an [IPify Geolocation API key](https://geo.ipif
    VITE_IPIFY_API_KEY=your_ipify_api_key
    ```
 
+### Links
+
+- Live Site URL: [https://jlb-ip-address-tracker.netlify.app/](https://jlb-ip-address-tracker.netlify.app/)
+
 
 
 ### Manual deployment
-
-- Live Site URL: [https://jlb-ip-address-tracker.netlify.app/](https://jlb-ip-address-tracker.netlify.app/)
 
 Set your API key in `.env.local`, run `npm run build`, and upload the `dist` folder through [Netlify Drop](https://app.netlify.com/drop).
 
