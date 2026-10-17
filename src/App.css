@@ -1,0 +1,150 @@
+.tracker-header {
+  position: relative;
+  z-index: 2;
+  height: 280px;
+  padding: 29px 24px 0;
+  background: #5266d3 url("/images/pattern-bg-desktop (1).png") center / cover;
+  text-align: center;
+}
+h1 {
+  margin: 0 0 27px;
+  color: white;
+  font-size: 32px;
+  font-weight: 500;
+}
+.search {
+  display: flex;
+  max-width: 555px;
+  height: 58px;
+  margin: auto;
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+}
+.search:focus-within {
+  outline: 3px solid #b8c5ff;
+  outline-offset: 3px;
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  padding: 0 24px;
+  color: #2b2b2b;
+  font-size: 18px;
+}
+.search input::placeholder {
+  color: #777;
+}
+.search button {
+  flex: 0 0 58px;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+}
+.search button:hover {
+  background: #3f3f3f;
+}
+.search button:focus-visible {
+  outline: 3px solid #a0b2ff;
+  outline-offset: -5px;
+}
+.search button:disabled {
+  cursor: wait;
+  background: #3f3f3f;
+}
+.status {
+  margin: 10px auto 0;
+  max-width: 700px;
+  color: white;
+  font-size: 13px;
+}
+.results {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: calc(100% - 48px);
+  max-width: 1110px;
+  min-height: 161px;
+  margin: 0;
+  padding: 37px 0;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 14px 30px #0001;
+  text-align: left;
+}
+.result {
+  padding: 0 32px;
+}
+.result + .result {
+  border-left: 1px solid #ddd;
+}
+.result dt {
+  margin-bottom: 13px;
+  color: #777;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.result dd {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.map {
+  position: relative;
+  z-index: 1;
+  height: calc(100svh - 280px);
+  min-height: 520px;
+}
+@media (max-width: 700px) {
+  .tracker-header {
+    height: 300px;
+    padding-top: 25px;
+    background-image: url("/images/pattern-bg-mobile (1).png");
+  }
+  h1 {
+    font-size: 26px;
+    margin-bottom: 29px;
+  }
+  .search input {
+    padding: 0 18px;
+  }
+  .search input::placeholder {
+    font-size: 14px;
+  }
+  .status {
+    font-size: 12px;
+  }
+  .results {
+    top: 167px;
+    grid-template-columns: 1fr;
+    gap: 23px;
+    padding: 25px 20px;
+    text-align: center;
+  }
+  .result {
+    padding: 0;
+  }
+  .result + .result {
+    border-left: 0;
+  }
+  .result dt {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+  .result dd {
+    font-size: 20px;
+  }
+  .map {
+    height: calc(100svh - 300px);
+    min-height: 528px;
+  }
+}
