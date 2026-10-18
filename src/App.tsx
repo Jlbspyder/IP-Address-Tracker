@@ -10,13 +10,15 @@ type Result = {
 }
 
 async function lookup(query: string, signal: AbortSignal): Promise<Result> {
-  const key = import.meta.env.VITE_IPIFY_API_KEY
-  if (!key) throw new Error('Add your IPify API key to .env.local to enable lookups.')
-  const params = new URLSearchParams({ apiKey: key })
-  if (query) params.set(query.includes(':') || /^[\d.]+$/.test(query) ? 'ipAddress' : 'domain', query)
-  const response = await fetch(`https://geo.ipify.org/api/v2/country,city?${params}`, { signal })
+  const params = new URLSearchParams({ query })
+  const response = await fetch(`/.netlify/functions/lookup?${params}`, { signal })
+  if (!response.headers.get('content-type')?.includes('application/json')) {
+    throw new Error(import.meta.env.DEV
+      ? 'Start npm run dev:netlify and open http://localhost:8888 to enable lookups.'
+      : 'The lookup function is missing. Deploy the full project to Netlify.')
+  }
   if (!response.ok) {
-    if ([401, 403].includes(response.status)) throw new Error('Check your IPify API key and available credits.')
+    if (response.status >= 500) throw new Error('The lookup service is unavailable. Please try again later.')
     throw new Error('Could not find that address. Check the IP or domain and try again.')
   }
   const data: Result = await response.json()

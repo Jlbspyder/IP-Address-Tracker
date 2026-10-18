@@ -33,11 +33,29 @@ Install Node.js and npm, and get an [IPify Geolocation API key](https://geo.ipif
    npm install
    ```
 
-2. Create `.env.local` in the project root:
+2. Create `.env` in the project root (ignored by Git):
 
    ```env
-   VITE_IPIFY_API_KEY=your_ipify_api_key
+   IPIFY_API_KEY=your_ipify_api_key
    ```
+
+3. Run `npm run dev:netlify` and open `http://localhost:8888`. Accept the Netlify CLI installation prompt on the first run. This runs both Vite and the server-side lookup function. Plain `npm run dev` only runs the frontend.
+
+If you see an HTML/JSON parsing error or a missing-function message on port 5173, stop Vite with Ctrl+C, run `npm run dev:netlify`, and use port 8888. Use a complete public IP such as `8.8.8.8` to test; `876` is not a valid IP address. On localhost, the function discovers your computer's public IP through IPify when Netlify Dev reports a loopback address. On Netlify, it uses the visitor IP supplied by the platform.
+
+## Deploy to Netlify
+
+Connect the repository to Netlify. The included `netlify.toml` configures the build, publish directory, and functions. In Netlify's environment variables, set `IPIFY_API_KEY` with Functions scope (or all scopes), then deploy.
+
+Alternatively, run `npx netlify-cli deploy --build --prod` from the project root after signing in. Uploading only `dist` through Netlify Drop will not deploy the function.
+
+## API key security
+
+The browser calls `/.netlify/functions/lookup`. Only the Netlify Function contacts IPify, using the server-side `IPIFY_API_KEY` variable. Do not use a `VITE_` prefix for secrets.
+
+If an earlier deployment exposed your key, revoke it in IPify and generate a replacement. Remove `VITE_IPIFY_API_KEY` from Netlify and local files, set the replacement as `IPIFY_API_KEY`, and deploy this version. Old deployed bundles may still contain the revoked key.
+
+The lookup endpoint is public. Keeping the key private does not prevent others from calling the endpoint; use Netlify rate limits or bot protection if it attracts abuse.
 
 ### Links
 
